@@ -9,8 +9,10 @@ Currently, two official plugins are available:
 
 # TO RUN THE TEST
 * Clone the project
-* Open Terminal and run "npm run dev  "
+* run npm install
+* Open Terminal and run "npm run dev"
 * Click on the URL in local
 * Then open the new terminal 
 * Now run 'cd .\em-cypress-tests\'
+* run 'npm install' 
 * Then run 'npx cypress open'
