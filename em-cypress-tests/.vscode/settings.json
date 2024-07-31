@@ -1,0 +1,16 @@
+{
+    "cucumberautocomplete.steps": [
+    "em-cypress-tests/cypress/e2e/step_definitions/*.js"
+    ],
+    
+    "cucumberautocomplete.syncfeatures": "em-cypress-tests/cypress/e2e/features/*.feature",
+    "cucumberautocomplete.strictGherkinCompletion": true,
+    "cucumberautocomplete.smartSnippets": true,
+    "cucumberautocomplete.stepsInvariants": true,
+    "cucumberautocomplete.onTypeFormat": true,
+    "editor.quickSuggestions": {
+        "comments": false,
+        "strings": true,
+        "other": true
+    }
+}
