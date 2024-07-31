@@ -12,6 +12,7 @@ Then("User should view Employee List heading on Page", () => {
 When('User click on the {string} button', (button) => {
     if (button == 'Add Employee') {
         addEmployeePageObject.getAddEmployeeButton();
+
     }
     else {
         addEmployeePageObject.getSubmitButton();
@@ -74,10 +75,12 @@ When('User clicks on the {string} button for existing user', (button) => {
     }
     else {
         cy.get(`table .divide-y:contains(${userName})`).find('.inline-block').click();
+        cy.generateRandomUser();
+        cy.wait(1000)
     }
 });
 
-Then('existing user should be removed from the employee list', () => {
+Then('Existing user should be removed from the employee list', () => {
     addEmployeePageObject.getEmployeeRecord();
 });
 
@@ -95,17 +98,38 @@ Then("User updates {string},{string} with {string} data", (val1, val2, type) => 
 Then('User should view updated employee details in the employee list', () => {
     addEmployeePageObject.getEmployeeRecordTable();
 });
-Then("User should view DOB field should be corrected",()=>{
+Then("User should view DOB field should be corrected", () => {
     cy.get('input#dob').invoke('val')
-    .then((value) => {
-      cy.log('The value is: ' + value);
-      expect(value).to.not.eq('244/354/23312');
+        .then((value) => {
+            cy.log('The value is: ' + value);
+            expect(value).to.not.eq('244/354/23312');
+        })
+});
+
+When("User checks the employee status", () => {
+    cy.get('.divide-y > tr > :nth-child(7)').invoke('text').then((value) => {
+        cy.wrap(value).as('val');
     })
-} );
+});
+    Then("Updates the status for existing user", () => {
+        cy.get('@val').then((val) => {
+            if (val == "active") {
+                cy.get('#status').select("inactive")
+            }
+            else {
+                cy.get('#status').select("active")
+            }
+        })
+        cy.get('#status').invoke('val').then((value) => {
+            cy.wrap(value).as('updatedVal');
+        })
+    });
 
-When("User updates status of existing employee",()=>{
 
-})
-Then ("status should be updated",()=>{
-
+Then("status should be updated", () => {
+    cy.get('@updatedVal').then((uVal)=>{
+    cy.get('.divide-y > tr > :nth-child(7)').invoke('text').then((value) => {
+      expect(value).to.eq(uVal)
+    });
+});
 });

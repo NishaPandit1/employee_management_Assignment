@@ -46,6 +46,7 @@ Cypress.Commands.add('generateRandomUser', () => {
 });
 
 Cypress.Commands.add('registerUser', () => {
+    cy.generateRandomUser();
     addEmployeePageObject.getAddEmployeeButton();
     addEmployeePageObject.getNameField();
     addEmployeePageObject.getSalaryField();
